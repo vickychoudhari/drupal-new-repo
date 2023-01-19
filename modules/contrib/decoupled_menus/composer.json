@@ -1,0 +1,9 @@
+{
+  "name": "drupal/decoupled_menus",
+  "type": "drupal-module",
+  "description": "Provides decoupled menus",
+  "homepage": "https://www.drupal.org/project/decoupled_menus",
+  "require": {
+    "drupal/core": "^9.2"
+  }
+}

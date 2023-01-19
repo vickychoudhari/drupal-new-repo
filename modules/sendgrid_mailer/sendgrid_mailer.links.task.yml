@@ -1,0 +1,9 @@
+sendgrid_mailer.settings_form:
+  route_name: sendgrid_api.configuration_form
+  title: 'SendGrid settings'
+  base_route: sendgrid_api.configuration_form
+sendgrid_mailer.test_form:
+  route_name: sendgrid_mailer.test_form
+  title: 'SendGrid email test'
+  weight: 100
+  base_route: sendgrid_api.configuration_form

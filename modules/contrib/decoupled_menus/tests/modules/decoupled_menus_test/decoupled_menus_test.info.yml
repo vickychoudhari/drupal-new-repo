@@ -1,0 +1,12 @@
+name: 'Decoupled menus test module'
+type: module
+description: 'Support module for decoupled_menus testing.'
+package: Testing
+core_version_requirement: ^9
+dependencies:
+  drupal:user
+
+# Information added by Drupal.org packaging script on 2021-03-17
+version: '1.0.0-beta1'
+project: 'decoupled_menus'
+datestamp: 1616012303

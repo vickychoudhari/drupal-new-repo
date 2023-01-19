@@ -1,0 +1,9 @@
+services:
+  decoupled_menus.collection_builder:
+    class: Drupal\decoupled_menus\MenuLinkCollectionBuilder
+
+  decoupled_menus.route_subscriber:
+    class: Drupal\decoupled_menus\Routing\EventSubscriber
+    arguments: ['%authentication_providers%']
+    tags:
+      - { name: event_subscriber }

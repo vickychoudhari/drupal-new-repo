@@ -1,0 +1,15 @@
+user_activity_log.nodes:
+  path: '/listallnodes'
+  defaults:
+    _controller: '\Drupal\user_activity_log\Controller\UserallActivityController::listOfNodes'
+    _title: 'List User All Activity'
+  requirements:
+    _permission: 'access content'
+user_activity_log.comment:
+  path: '/listallcomments'
+  defaults:
+    _controller: '\Drupal\user_activity_log\Controller\UserallActivityController::listOfComments'
+    _title: 'List User All Activity'
+  requirements:
+    _permission: 'access content'
+    

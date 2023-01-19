@@ -1,0 +1,10 @@
+decoupled_menus.menu.linkset:
+  path: '/system/menu/{menu}/linkset'
+  defaults:
+    _controller: 'Drupal\decoupled_menus\Controller\Linkset::process'
+  requirements:
+    _access: 'TRUE'
+  options:
+    parameters:
+      menu:
+        type: 'entity:menu'

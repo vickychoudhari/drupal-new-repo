@@ -1,0 +1,9 @@
+<?php
+function dn_block_views_pre_build(ViewExecutable $view){
+    // print_r($view->id());
+    // die();
+
+    if ($view->id() == 'view_filter_after_view_load' && $view->getDisplay()->display['id'] == 'page_1'){
+        die();
+    }
+    }

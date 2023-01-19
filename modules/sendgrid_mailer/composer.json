@@ -1,0 +1,22 @@
+{
+    "name": "drupal/sendgrid_mailer",
+    "description": "Provides a Mail class to be used with MailSystem module to send HTML emails using SendGrid API.",
+    "type": "drupal-module",
+    "homepage": "https://www.drupal.org/project/sendgrid_mailer",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Matias Miranda",
+            "homepage": "https://www.drupal.org/u/matiasmiranda"
+        }
+    ],
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/search/sendgrid_mailer",
+        "source": "https://git.drupalcode.org/project/sendgrid_mailer"
+    },
+    "require": {
+        "php": "^7.3|^8.0",
+        "drupal/sendgrid_api": "^1.0",
+        "drupal/mailsystem": "^4.3"
+    }
+}

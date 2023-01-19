@@ -1,0 +1,13 @@
+name: DN Block
+
+type: module
+
+description: Sample blocks source code by DigitalNadeem
+
+package: Custom
+
+version: 1.0
+
+core: 8.x
+
+core_version_requirement: ^8 || ^9

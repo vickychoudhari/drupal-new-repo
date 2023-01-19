@@ -1,0 +1,105 @@
+<?php
+
+/**
+ * @file
+ * Sendgrid mailer.
+ */
+
+use Drupal\Core\Site\Settings;
+
+/**
+ * @file
+ * Hook implementations for SendGrid Mailer module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function sendgrid_mailer_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.sendgrid_mailer':
+      $output  = '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This is a SendGrid Mailer module.') . '</p>';
+      $output .= '<ul>';
+      $output .= '<li>' . t('It allows to send HTML mails using SendGrid API.') . '</li>';
+      $output .= '</ul>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function sendgrid_mailer_theme() {
+  return [
+    'sendgrid_mailer_wrapper' => [
+      'variables' => [
+        'message' => [],
+        'module' => '',
+        'key' => '',
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function template_preprocess_sendgrid_mailer_wrapper(array &$variables) {
+  $variables['module'] = str_replace('_', '-', $variables['module']);
+  $variables['key'] = str_replace('_', '-', $variables['key']);
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ *
+ * The template used is the one that is most specific.
+ * Example for the core user module's 'password_reset'
+ * email the order of precedence for selecting the template used will be:
+ * 1. sendgrid-mailer-wrapper--user--password-reset.html.twig
+ * 2. sendgrid-mailer-wrapper--user.html.twig
+ * 3. sendgrid-mailer-wrapper.html.twig
+ * .
+ */
+function sendgrid_mailer_theme_suggestions_sendgrid_mailer_wrapper(array $variables) {
+  return [
+    'sendgrid_mailer_wrapper__' . $variables['module'],
+    'sendgrid_mailer_wrapper__' . $variables['module'] . '__' . $variables['key'],
+  ];
+}
+
+/**
+ * Implements hook_mail().
+ */
+function sendgrid_mailer_mail($key, &$message, $params) {
+  $message['module'] = 'sendgrid_mailer';
+  $message['key'] = $key;
+  $message['subject'] = $params['subject'];
+  $message['body'] = explode(
+    Settings::get('mail_line_endings', PHP_EOL) . Settings::get('mail_line_endings', PHP_EOL),
+    $params['body']
+  );
+  if ($params['include_test_attachment']) {
+    $message['attachments'][] = [
+      'uri' => 'core/misc/druplicon.png',
+      'filename' => 'druplicon.png',
+      'filemime' => 'image/png',
+    ];
+  }
+  if (isset($params['Reply-to']) && !empty($params['Reply-to'])) {
+    $message['headers']['Reply-to'] = $params['Reply-to'];
+  }
+  else {
+    if (isset($params['reply_to']) && !empty($params['reply_to'])) {
+      $message['headers']['Reply-to'] = $params['reply_to'];
+    }
+  }
+  if (isset($params['cc']) && !empty($params['cc'])) {
+    $message['headers']['cc'] = $params['cc'];
+  }
+  if (isset($params['bcc']) && !empty($params['bcc'])) {
+    $message['headers']['bcc'] = $params['bcc'];
+  }
+}

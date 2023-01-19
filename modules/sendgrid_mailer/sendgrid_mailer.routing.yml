@@ -1,0 +1,7 @@
+sendgrid_mailer.test_form:
+  path: 'admin/config/services/sendgrid/test'
+  defaults:
+    _title: 'SendGrid Test Email Send'
+    _form: 'Drupal\sendgrid_mailer\Form\SendGridMailTestForm'
+  requirements:
+    _permission: 'administer sendgrid_api'

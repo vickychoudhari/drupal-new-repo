@@ -1,0 +1,7 @@
+dn_mail.contact:
+  path: '/contact-form'
+  defaults:
+    _title: 'Send Contact'
+    _form: '\Drupal\dn_mail\Form\SendContact'
+  requirements:
+    _access: 'TRUE'

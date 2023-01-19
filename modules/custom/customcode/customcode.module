@@ -1,0 +1,42 @@
+<?php
+
+use Drupal\block\Entity\Block;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\Entity\Node;
+use Drupal\node\Entity\NodeType;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Access\AccessResult;
+use Drupal\user\Entity\Role;
+use Drupal\user\Entity\User;
+use Drupal\Core\Url;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+
+
+/**
+ * Implement hook_node_access().
+ */
+
+
+function customcode_node_access(NodeInterface $node, $op, AccountInterface $account) {
+    $type = $node->getType();
+    $node_author_uid = $node->getOwnerId();
+  	$current_user_uid = \Drupal::currentUser()->id();
+    $lang_code = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  	$nid = $node->id();
+
+    $roles = \Drupal::currentUser()->getRoles();
+
+    // print_r($roles);
+    // die();
+   if(\Drupal::currentUser()->isAnonymous() && ($type ='article' && $nid == 13)){
+     return  AccessResult::forbidden();
+    
+   }else{
+    
+    return  AccessResult::allowed();
+   }
+}
+ 

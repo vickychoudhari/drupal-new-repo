@@ -1,0 +1,13 @@
+name: SendGrid Mailer
+type: module
+description: Provides a mailer to send emails using SendGrid API.
+core_version_requirement: ^8.8 || ^9 || ^10
+php: 7.3
+dependencies:
+  - drupal:mailsystem
+  - drupal:sendgrid_api
+
+# Information added by Drupal.org packaging script on 2022-10-18
+version: '1.1.1'
+project: 'sendgrid_mailer'
+datestamp: 1666060964

@@ -1,0 +1,55 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - nodes_count: Count of nodes.
+ * - comment_count: Count of comments.
+ * - list_nodes: List of nodes.
+ * - list_comments: List of comments.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+
+<div class ="user-activity-log">
+  <ul>
+    <li>Total nodes created ({{nodes_count}})</li>
+  </ul>
+  <ul>
+    <li> Total comment created ({{comment_count}})</li>
+  </ul>
+  <h3> {{'Recent Created Node' |t }}</h3>
+
+  <ul>
+    {% if list_nodes is empty %}
+        <li> {{ 'No Recent Nodes.' |t }} </li>
+    {% endif %}
+
+    {% for node in list_nodes %}
+      <div class="node-list">
+        <li><a href="{{ node.url }}">
+        {{node.title}}</a></li>
+      </div>
+    {% endfor %}
+
+  </ul>
+
+  <h3> Recent Comments</h3>
+
+  <ul>
+    {% if list_comments is empty %}
+        <li> {{ 'No Recent Comments.' |t }} </li>
+    {% endif %}
+
+    {% for node in list_comments %}
+      <div class="node-list">
+        <li> {{ 'Commented on' |t }} <a href="{{ node.uri }}">
+        {{ node.title }}</a></li>
+      </div>
+    {% endfor %}
+  </ul>
+
+  <a href="{{ path('user_activity_log.nodes') }}">Show more</a>
+</div>

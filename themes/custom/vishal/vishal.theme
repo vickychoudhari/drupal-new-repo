@@ -1,0 +1,70 @@
+<?php 
+use Drupal\Core\Routing;
+use Drupal\node\Entity\Node;
+use Drupal\file\Entity\File;
+use Drupal\Core\Url;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\paragraphs\Entity\Paragraph;
+
+
+function vishal_preprocess_node(&$variables) {
+    $sham= $variables['node']->getType();
+    if($variables['node']->getType() === 'article'){
+        $nid =$variables['node']->id();
+        $node = Node::load($nid);
+        $node_title =$variables['node']->getTitle();
+        $presentation =$node->get('field_presentations')->referencedEntities();
+        // echo "<pre>";print_r($presentation);
+        // die();
+        $html =[];
+        $variables['pdf_file_title'] =' ';
+        foreach($presentation as $para_field){
+            // print_r($para_field);
+            // die();
+        $file_field =$para_field->get('field_presentation_file')->getValue();
+        $title_field =$para_field->get('field_presentation_title')->getValue();
+        // print_r($title_field);
+        // die();
+        $getfile =File::load($file_field[0]['target_id']);
+        $file_uri =$getfile->uri->value;
+        $create_uri = file_create_url($file_uri);
+        // print_r($create_uri);
+        // die();
+        $html[] = '<div class="scifi__cta-btn text-left mt-2">
+<div class="file-title"><p class="field_p_title"><strong>'.$title_field[0]['value'].'</strong></p></div>
+<div class="file-pdf"><a class="btn" href='.$create_uri.'>Download Pdf</a></div>
+</div>';
+$variables['pdf_file_title'] =implode(' ' , $html);
+// print_r($variables['pdf_file_title']);
+// die();
+
+        }
+    }
+    if($variables['node']->gettype() === 'blogs'){
+        $htmls =[];
+        $variables['pdf_file_titles'] =' ';
+        $nid =$variables['node']->id();
+        $node = Node::load($nid);
+        $node_title =$variables['node']->getTitle();
+        $node_image =$node->get('field_blog_image')->getValue();
+        $body =$node->get('body')->getValue();
+        $bodydata =$body[0]['value'];
+        // print_r($bodydata);
+        // die()
+        $file_load =File::load($node_image[0]['target_id']);
+        $file_uri =$file_load->uri->value;
+        $file_url = file_create_url($file_uri);
+        $htmls[] = '<div class="scifi__cta-btn text-left mt-2">
+        <div class="file-title"><p class="field_p_title"><strong>'.$node_title.'</strong></p></div>
+        <div class="file-pdf"><a class="btn" target ="blank" href='.$file_url.'>Download images</a>
+        <div class="body"> '. $bodydata. ' </div>
+        </div>';
+        $variables['pdf_file_titles'] =implode(' ' , $htmls);
+
+        // echo "<pre>";
+        // print_r($variables['pdf_file_titles']);
+        // die();
+   
+
+    }
+}

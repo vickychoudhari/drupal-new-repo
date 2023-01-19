@@ -1,0 +1,11 @@
+services:
+  sample_events.event_subscriber_sample:
+    class: Drupal\dn_event\EventSubscriber\SampleEventSubScriber
+    tags:
+      - { name: 'event_subscriber' }
+
+  dn_event.redirect_subscriber:
+    class: Drupal\dn_event\EventSubscriber\RedirectEventSubscriber
+    arguments: []
+    tags:
+      - {name: event_subscriber}

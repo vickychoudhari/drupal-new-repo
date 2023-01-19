@@ -1,0 +1,13 @@
+name: DN Event 
+
+type: module
+
+description: Event Sample By by DigitalNadeem.com.
+
+package: Custom
+
+version: 1.0
+
+core: 8.x
+
+core_version_requirement: ^8 || ^9

@@ -1,0 +1,12 @@
+name: Decoupled Menus
+description: Provides HTTP interfaces for consuming Drupal-managed menus.
+type: module
+core_version_requirement: ^9
+package: Web services
+dependencies:
+  - drupal:system (>=9.2)
+
+# Information added by Drupal.org packaging script on 2021-03-17
+version: '1.0.0-beta1'
+project: 'decoupled_menus'
+datestamp: 1616012303
